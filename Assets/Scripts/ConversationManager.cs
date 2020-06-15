@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ConversationState { Introduction }
+public enum ConversationBlock { Introduction }
 
 
 public class ConversationManager : MonoBehaviour
 {
 
-    public static ConversationState state = ConversationState.Introduction;
+    public static ConversationBlock state = ConversationBlock.Introduction;
 
     [SerializeField]
     private UIFiller ui;
@@ -18,6 +18,14 @@ public class ConversationManager : MonoBehaviour
     private RomeoBlock _currentRomeoResponse;
     private bool _julietFlagDirty = false;
 
+    private Dictionary<ConversationBlock, int> _blockState = new Dictionary<ConversationBlock, int>();
+
+    private void Start()
+    {
+        _currentRomeoResponse = GetRomeoBlock(1);
+        ui.DisplayResponse(_currentRomeoResponse);
+        _blockState.Add(ConversationBlock.Introduction, 0);
+    }
 
     // Update is called once per frame
     void Update()
@@ -41,11 +49,25 @@ public class ConversationManager : MonoBehaviour
     private void GetRomeoResponse(string s)
     {
 
-        if(state == ConversationState.Introduction)
+        if(state == ConversationBlock.Introduction)
         {
-            _currentRomeoResponse = GetRomeoBlock(2);
-            ui.DisplayResponse(_currentRomeoResponse);
+            if (_blockState[state] == 0)
+            {
+                _currentRomeoResponse = GetRomeoBlock(2);
+                _blockState[state] = 1;
+            }
+            //Introduction pool
+            else if(_blockState[state] == 1)
+            {
+                if (TextChecker.CheckRosaline(s))
+                {
+                    _currentRomeoResponse = GetRomeoBlock(1000);
+                }
+            }
         }
+
+        ui.DisplayResponse(_currentRomeoResponse);
+
     }
 
 
@@ -53,5 +75,10 @@ public class ConversationManager : MonoBehaviour
     {
         return (TextReader.RomeoBlocks[id]);
     }
+
+
+   
+
+
 
 }
