@@ -1,27 +1,17 @@
-﻿001+
-But, soft! what light through yonder window breaks?+
-It is the east, and you are the sun.+
-Arise, fair sun, and kill the envious moon.
--
-002+
-She speaks:+
-O, speak again, bright angel!
-
-
-
-
--
-1000+
-Rosaline? no;+
-I have forgotten that name, and that name's woe.
--
-1001+
-Good night, good night! parting is such+
-sweet sorrow.+
-That I shall say good night till it be morrow.
--
-1002+
-I thank thee+
-O, that I were a glove upon thy hand,+
-That I might touch that cheek!
-
+﻿goodbye+
+bye+
+good bye+
+good night+
+goodnight+
+im leaving+
+i am leaving+
+stop talking to me+
+go away+
+peace out+
+see ya+
+leave me alone+
+fuck off+
+please leave me alone+
+see you later+
+seeya later+
+see ya later

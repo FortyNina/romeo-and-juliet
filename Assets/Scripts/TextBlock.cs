@@ -35,4 +35,10 @@ public class TextBlock : MonoBehaviour
         return a;
     }
 
+    public void CombineWith(TextBlock t)
+    {
+        _fullText += t.FullText;
+        
+    }
+
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ConversationBlock { Introduction }
+public enum ConversationBlock { Introduction, FamilyStuff, JustChatting }
 
 
 public class ConversationManager : MonoBehaviour
@@ -24,7 +24,10 @@ public class ConversationManager : MonoBehaviour
     {
         _currentRomeoResponse = GetRomeoBlock(1);
         ui.DisplayResponse(_currentRomeoResponse);
+
         _blockState.Add(ConversationBlock.Introduction, 0);
+        _blockState.Add(ConversationBlock.FamilyStuff, 0);
+        _blockState.Add(ConversationBlock.JustChatting, 0);
     }
 
     // Update is called once per frame
@@ -48,8 +51,9 @@ public class ConversationManager : MonoBehaviour
 
     private void GetRomeoResponse(string s)
     {
-
-        if(state == ConversationBlock.Introduction)
+        #region Introduction Blocks
+        //INTRODUCTION SECTION=======================================================================================
+        if (state == ConversationBlock.Introduction)
         {
             if (_blockState[state] == 0)
             {
@@ -63,8 +67,48 @@ public class ConversationManager : MonoBehaviour
                 {
                     _currentRomeoResponse = GetRomeoBlock(1000);
                 }
+                else if (TextChecker.CheckBye(s))
+                {
+                    _currentRomeoResponse = GetRomeoBlock(1001);
+                }
+                else if (TextChecker.CheckSup(s))
+                {
+                    //plot out sup
+                    if(_blockState[ConversationBlock.FamilyStuff] < 5) //TODO: CHANGE OUT 5
+                    {
+                        //go to family things
+
+                    }
+
+
+                }
+              //  else if() asking about identity
+                //family region
             }
         }
+        //===========================================================================================================
+        #endregion
+
+        #region Family Stuff Blocks
+        //FAMILY SECTION=======================================================================================
+        else if (state == ConversationBlock.FamilyStuff)
+        {
+            if(_blockState[state] == 0)
+            {
+                
+            }
+        }
+        //===========================================================================================================
+        #endregion
+
+        #region Just Chatting Blocks
+        //CHATTING SECTION=======================================================================================
+        else if (state == ConversationBlock.JustChatting)
+        {
+            if (_blockState[state] == 0)
+        }
+        //===========================================================================================================
+        #endregion
 
         ui.DisplayResponse(_currentRomeoResponse);
 

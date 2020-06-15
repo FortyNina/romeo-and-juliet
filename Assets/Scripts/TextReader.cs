@@ -8,31 +8,76 @@ public class TextReader : MonoBehaviour
 {
     [SerializeField]
     private TextAsset _romeoResponses;
+    [SerializeField]
+    private TextAsset _byeResponses;
+    [SerializeField]
+    private TextAsset _supResponses;
+    [SerializeField]
+    private TextAsset _indifferenceResponses;
+    [SerializeField]
+    private TextAsset _yesResponses;
+    [SerializeField]
+    private TextAsset _noResponses;
 
     private static Dictionary<int, RomeoBlock> _romeoBlocks = new Dictionary<int, RomeoBlock>();
-
     public static Dictionary<int, RomeoBlock> RomeoBlocks
     {
-        get{ return _romeoBlocks; }
+        get { return _romeoBlocks; }
     }
 
+    private static string[] _byeLines;
+    public static string[] ByeLines
+    {
+        get{return _byeLines;}
+    }
+
+    private static string[] _supLines;
+    public static string[] SupLines
+    {
+        get { return _supLines; }
+    }
+
+    private static string[] _indifferenceLines;
+    public static string[] IndifferenceLines
+    {
+        get { return _indifferenceLines; }
+    }
+
+    private static string[] _yesLines;
+    public static string[] YesLines
+    {
+        get { return _yesLines; }
+    }
+
+    private static string[] _noLines;
+    public static string[] NoLines
+    {
+        get { return _noLines; }
+    }
 
     private void Awake()
     {
-        ReadData(_romeoResponses);
+        ReadData();
     }
 
 
-    private void ReadData(TextAsset txt)
+    private void ReadData()
     {
 
-        string[] chunks = txt.text.Split('-');
-
+        //ROMEO DATA
+        string[] chunks = _romeoResponses.text.Split('-');
         for(int i = 0; i< chunks.Length; i++)
         {
             RomeoBlock rb = new RomeoBlock(chunks[i]);
             RomeoBlocks.Add(rb.TextId, rb);
         }
+
+        //BYE DATA
+        _byeLines = _byeResponses.text.Split('+');
+
+        //SUP DATA
+        _supLines = _supResponses.text.Split('+');
+        
 
     }
 }

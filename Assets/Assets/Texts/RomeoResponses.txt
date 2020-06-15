@@ -8,6 +8,15 @@ She speaks:+
 O, speak again, bright angel!
 
 
+-
+100+
+I know not how to tell thee who I am:+
+My name, dear saint, is hateful to myself
+-
+101+
+Because it is an enemy to thee
+
+
 
 
 -
@@ -21,7 +30,10 @@ sweet sorrow.+
 That I shall say good night till it be morrow.
 -
 1002+
-I thank thee+
+Thank thee+
 O, that I were a glove upon thy hand,+
 That I might touch that cheek!
+-
+1003+
+No, fair saint, if thee dislike
 
