@@ -24,7 +24,6 @@ public class TextBlock : MonoBehaviour
     public string[] TextLines
     {
         get { return _textLines; }
-        set { _textLines = value; }
     }
 
 
@@ -39,6 +38,17 @@ public class TextBlock : MonoBehaviour
     {
         _fullText += t.FullText;
         
+    }
+
+    public void ReplaceLine(int lineNumber, string replacement)
+    {
+        _textLines[lineNumber] = replacement;
+    }
+
+    public void AddLine(string lineToAdd)
+    {
+        _textLines = BreakText(_fullText + "+" + lineToAdd);
+
     }
 
 }

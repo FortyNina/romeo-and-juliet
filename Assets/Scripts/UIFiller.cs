@@ -33,15 +33,15 @@ public class UIFiller : MonoBehaviour
     {
         if(block.speaker == SpeakerName.Juliet)
         {
-            StartCoroutine(DisplayEachLine(block.TextLines, 0, 0, _julietCol, SpeakerName.Juliet));
+            StartCoroutine(DisplayEachLine(block.TextLines, 0, 0, _julietCol, SpeakerName.Juliet.ToString()));
         }
         else if(block.speaker == SpeakerName.Romeo)
         {
-            StartCoroutine(DisplayEachLine(block.TextLines, 2f, .5f, _romeoCol, SpeakerName.Romeo));
+            StartCoroutine(DisplayEachLine(block.TextLines, 2f, .5f, _romeoCol, ConversationManager.RomeoName));
         }
     }
 
-    private IEnumerator DisplayEachLine(string[] lines, float initialWaitTime, float inbetweenWaitTime, Color col, SpeakerName speaker)
+    private IEnumerator DisplayEachLine(string[] lines, float initialWaitTime, float inbetweenWaitTime, Color col, string speaker)
     {
         yield return new WaitForSeconds(initialWaitTime);
 

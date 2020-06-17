@@ -32,7 +32,6 @@ public class RomeoBlock : TextBlock
         _fullText = txt;
         _textId = FindTextID(txt);
         string stripped = StripID(txt);
-        Debug.Log(stripped);
         _textLines = BreakText(stripped);
         speaker = SpeakerName.Romeo;
 

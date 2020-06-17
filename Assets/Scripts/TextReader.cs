@@ -18,6 +18,10 @@ public class TextReader : MonoBehaviour
     private TextAsset _yesResponses;
     [SerializeField]
     private TextAsset _noResponses;
+    [SerializeField]
+    private TextAsset _whyResponses;
+    [SerializeField]
+    private TextAsset _greetingResponses;
 
     private static Dictionary<int, RomeoBlock> _romeoBlocks = new Dictionary<int, RomeoBlock>();
     public static Dictionary<int, RomeoBlock> RomeoBlocks
@@ -55,6 +59,18 @@ public class TextReader : MonoBehaviour
         get { return _noLines; }
     }
 
+    private static string[] _whyLines;
+    public static string[] WhyLines
+    {
+        get { return _whyLines; }
+    }
+
+    private static string[] _greetingLines;
+    public static string[] GreetingLines
+    {
+        get { return _greetingLines; }
+    }
+
     private void Awake()
     {
         ReadData();
@@ -78,6 +94,20 @@ public class TextReader : MonoBehaviour
         //SUP DATA
         _supLines = _supResponses.text.Split('+');
         
+        //NO DATA
+        _noLines = _noResponses.text.Split('+');
+
+        //YES DATA
+        _yesLines = _yesResponses.text.Split('+');
+
+        //INDIFFERENT DATA
+        _indifferenceLines = _indifferenceResponses.text.Split('+');
+
+        //WHY DATA
+        _whyLines = _whyResponses.text.Split('+');
+
+        //GREETING DATA
+        _greetingLines = _greetingResponses.text.Split('+');
 
     }
 }
