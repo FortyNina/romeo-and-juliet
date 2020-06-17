@@ -1,9 +1,0 @@
-﻿hello+
-hi+
-good evening+
-good morning+
-good afternoon+
-sup+
-yo+
-hey+
-heyo
