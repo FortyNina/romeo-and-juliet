@@ -4,51 +4,54 @@ using UnityEngine;
 
 public enum SpeakerName { Romeo, Juliet}
 
-public class TextBlock : MonoBehaviour
+namespace ShakespeareReader
 {
+	public class TextBlock : MonoBehaviour
+	{
 
-    public SpeakerName speaker;
+		public SpeakerName speaker;
 
-    protected static char _lineBreakChar = '+';
-
-
-    protected string _fullText = "";
-    public string FullText
-    {
-        get { return _fullText; }
-        set { _fullText = value; }
-    }
+		protected static char _lineBreakChar = '+';
 
 
-    protected string[] _textLines;
-    public string[] TextLines
-    {
-        get { return _textLines; }
-    }
+		protected string _fullText = "";
+		public string FullText
+		{
+			get { return _fullText; }
+			set { _fullText = value; }
+		}
 
 
-    //Break a piece of text into separate lines, depending on the specified delimiter
-    protected string[] BreakText(string txt)
-    {
-        string[] a = txt.Split(_lineBreakChar);
-        return a;
-    }
+		protected string[] _textLines;
+		public string[] TextLines
+		{
+			get { return _textLines; }
+		}
 
-    public void CombineWith(TextBlock t)
-    {
-        _fullText += t.FullText;
-        
-    }
 
-    public void ReplaceLine(int lineNumber, string replacement)
-    {
-        _textLines[lineNumber] = replacement;
-    }
+		//Break a piece of text into separate lines, depending on the specified delimiter
+		protected string[] BreakText(string txt)
+		{
+			string[] a = txt.Split(_lineBreakChar);
+			return a;
+		}
 
-    public void AddLine(string lineToAdd)
-    {
-        _textLines = BreakText(_fullText + "+" + lineToAdd);
+		public void CombineWith(TextBlock t)
+		{
+			_fullText += t.FullText;
 
-    }
+		}
 
+		public void ReplaceLine(int lineNumber, string replacement)
+		{
+			_textLines[lineNumber] = replacement;
+		}
+
+		public void AddLine(string lineToAdd)
+		{
+			_textLines = BreakText(_fullText + "+" + lineToAdd);
+
+		}
+
+	}
 }

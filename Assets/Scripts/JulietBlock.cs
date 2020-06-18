@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JulietBlock : TextBlock
-{
-    public JulietBlock(string txt)
-    {
-        _fullText = txt;
-        _textLines = BreakText(txt);
-        speaker = SpeakerName.Juliet;
 
-    }
+namespace ShakespeareReader
+{
+	public class JulietBlock : TextBlock
+	{
+		public JulietBlock(string txt)
+		{
+			_fullText = txt;
+			_textLines = BreakText(txt);
+			speaker = SpeakerName.Juliet;
+
+		}
+	}
 }

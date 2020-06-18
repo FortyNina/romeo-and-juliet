@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ShakespeareReader;
 
-public enum ConversationBlock { Introduction, FamilyStuff, JustChatting, FateOrFreeWill }
+public enum ConversationBlock { Introduction, FamilyStuff, JustChatting, FateOrFreeWill, InLove }
 
 
 public class ConversationManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class ConversationManager : MonoBehaviour
     public static ConversationBlock state = ConversationBlock.Introduction;
 
     public static string RomeoName = "Romeo";
+	public static string JulietName = "Juliet";
 
     [SerializeField]
     private UIFiller ui;
@@ -34,6 +36,7 @@ public class ConversationManager : MonoBehaviour
         _blockState.Add(ConversationBlock.FamilyStuff, 0);
         _blockState.Add(ConversationBlock.JustChatting, 0);
         _blockState.Add(ConversationBlock.FateOrFreeWill, 0);
+		_blockState.Add(ConversationBlock.InLove, 0);
     }
 
     // Update is called once per frame
@@ -153,15 +156,58 @@ public class ConversationManager : MonoBehaviour
                 }
                 else if (TextChecker.CheckNoContains(s))
                 {
-                    // _currentRomeoResponse = TODO: No scenario for no
+					_currentRomeoResponse = GetRomeoBlock(175);
+					_blockState[state] = 6;
                 }
             }
             else if(_blockState[state] == 4)
             {
-                RomeoName = "Romeo " + s;
+				RomeoName = "Romeo " + s;
                 _currentRomeoResponse = GetRomeoBlock(105);
-                _currentRomeoResponse.ReplaceLine(0, s + "?");
+				if (s.ToLower() == "capulet") //if the player input capulet
+				{
+					_currentRomeoResponse = GetRomeoBlock(150);
+				}
+                if(s.ToLower() == "montague")
+				{
+					_currentRomeoResponse = GetRomeoBlock(151);
+					RomeoName = "Romeo";
+				}
+				_currentRomeoResponse.ReplaceLine(0, s + "?"); //new name? your kinsman will still kill me
+				_blockState[state] = 5;
             }
+            else if(_blockState[state] == 5)
+			{
+				_blockState[state] = 6;
+				_currentRomeoResponse = GetRomeoBlock(106);
+			}
+
+            else if(_blockState[state] == 6)
+			{
+				if (TextChecker.CheckNo(s))
+				{
+					//no i am not a capulet
+					_currentRomeoResponse = GetRomeoBlock(108);
+
+					_blockState[state] = 7;
+				}
+				else if (TextChecker.CheckYes(s))
+				{
+					//yes, i am a capulet
+					_currentRomeoResponse = GetRomeoBlock(107);
+					state = ConversationBlock.JustChatting;
+				}
+
+
+			}
+            else if(_blockState[state] == 7)
+			{
+				JulietName = "Juliet " + s;
+				_currentRomeoResponse = GetRomeoBlock(109);
+				_currentRomeoResponse.ReplaceLine(0, s + "?"); //new name for juliet?
+				state = ConversationBlock.JustChatting;
+
+			}
         }
         //===========================================================================================================
         #endregion
@@ -182,18 +228,38 @@ public class ConversationManager : MonoBehaviour
         //===========================================================================================================
         #endregion
 
-        #region Fate of Free Will Blocks
+        #region Chatting Blocks
         //CHATTING SECTION=======================================================================================
         else if (state == ConversationBlock.JustChatting)
         {
+			if (CheckCasualConversation(s) >= 0)
+			{
+				_currentRomeoResponse = GetRomeoBlock(CheckCasualConversation(s));
+			}
+            else if (TextChecker.CheckGreetingContains(s))
+			{
+				_currentRomeoResponse = GetRomeoBlock(GetRandomCompliment());
+			}
             
         }
-        //===========================================================================================================
-        #endregion
+		//===========================================================================================================
+		#endregion
+
+		#region In Love? Blocks
+		//IN LOVE SECTION=======================================================================================
+		else if (state == ConversationBlock.InLove)
+		{
+            if(_blockState[state] == 0) //romeo has just asked if juliet loves him
+			{
+
+			}
+		}
+		//===========================================================================================================
+		#endregion
 
 
 
-        ui.DisplayResponse(_currentRomeoResponse);
+		ui.DisplayResponse(_currentRomeoResponse);
 
     }
 
@@ -211,7 +277,7 @@ public class ConversationManager : MonoBehaviour
         }
         else if (TextChecker.CheckBye(s))
         {
-            return 1001;
+            return 1007;
         }
         else if(TextChecker.CheckRobot(s))
         {
@@ -220,5 +286,13 @@ public class ConversationManager : MonoBehaviour
         }
         return -1;
     }
+
+    private int GetRandomCompliment()
+	{
+		if (Random.Range(0, 1) == 0){
+			return 2000;
+		}
+		return 2000;
+	}
 
 }

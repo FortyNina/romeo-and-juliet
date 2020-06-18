@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using ShakespeareReader;
 
 public class UIFiller : MonoBehaviour
 {
@@ -28,20 +29,23 @@ public class UIFiller : MonoBehaviour
     [SerializeField]
     private GameObject _contentParent;
 
+	[SerializeField]
+	private FocusInputField _inputField;
+
 
     public void DisplayResponse(TextBlock block)
     {
         if(block.speaker == SpeakerName.Juliet)
         {
-            StartCoroutine(DisplayEachLine(block.TextLines, 0, 0, _julietCol, SpeakerName.Juliet.ToString()));
+            StartCoroutine(DisplayEachLine(block.TextLines, 0, 0, _julietCol, ConversationManager.JulietName, SpeakerName.Juliet));
         }
         else if(block.speaker == SpeakerName.Romeo)
         {
-            StartCoroutine(DisplayEachLine(block.TextLines, 2f, .5f, _romeoCol, ConversationManager.RomeoName));
+            StartCoroutine(DisplayEachLine(block.TextLines, 2f, .5f, _romeoCol, ConversationManager.RomeoName, SpeakerName.Romeo));
         }
     }
 
-    private IEnumerator DisplayEachLine(string[] lines, float initialWaitTime, float inbetweenWaitTime, Color col, string speaker)
+    private IEnumerator DisplayEachLine(string[] lines, float initialWaitTime, float inbetweenWaitTime, Color col, string name, SpeakerName speaker)
     {
         yield return new WaitForSeconds(initialWaitTime);
 
@@ -49,7 +53,7 @@ public class UIFiller : MonoBehaviour
         CreateLine("", col, _blankLinePrefab);
 
         //Put Name
-        CreateLine(speaker.ToString().ToUpper(), col, _nameLinePrefab);
+        CreateLine(name.ToString().ToUpper(), col, _nameLinePrefab);
 
         for (int i = 0; i < lines.Length; i++)
         {
@@ -57,6 +61,11 @@ public class UIFiller : MonoBehaviour
             yield return new WaitForSeconds(inbetweenWaitTime);
 
         }
+        if(speaker == SpeakerName.Romeo)
+		{
+			_inputField.EnableTexting();
+		}
+
     }
 
 
