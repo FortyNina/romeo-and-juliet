@@ -4,16 +4,12 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-/// <summary>
-/// Data for each block of text (a single response) from the legend, Romeo himself
-/// </summary>
-///
+
 namespace ShakespeareReader
 {
 
 	public class RomeoBlock : TextBlock
 	{
-		private char[] _removalChars = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', _lineBreakChar };
 
 		//Associated conversation ID
 		private int _textId = -1;
@@ -50,6 +46,10 @@ namespace ShakespeareReader
 			int index = a[0].Length + 1;
 			return txt.Substring(index);
 		}
+
+
+		private char[] _removalChars = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', _lineBreakChar };
+
 
 	}
 }

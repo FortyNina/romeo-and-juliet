@@ -32,16 +32,22 @@ public class UIFiller : MonoBehaviour
 	[SerializeField]
 	private FocusInputField _inputField;
 
+    [SerializeField]
+    private AnswerRecorder _recorder;
+
 
     public void DisplayResponse(TextBlock block)
     {
         if(block.speaker == SpeakerName.Juliet)
         {
             StartCoroutine(DisplayEachLine(block.TextLines, 0, 0, _julietCol, ConversationManager.JulietName, SpeakerName.Juliet));
+            _recorder.WriteLine(block.FullText, ConversationManager.JulietName);
         }
         else if(block.speaker == SpeakerName.Romeo)
         {
             StartCoroutine(DisplayEachLine(block.TextLines, 2f, .5f, _romeoCol, ConversationManager.RomeoName, SpeakerName.Romeo));
+            _recorder.WriteLine(block.FullText, ConversationManager.RomeoName);
+
         }
     }
 
