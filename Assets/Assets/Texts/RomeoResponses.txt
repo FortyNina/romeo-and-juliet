@@ -58,7 +58,7 @@ What is thy family name?
 new name+
 Shall I take thee at thy word?+
 My ears have not yet drunk a hundred words+
-Of that tongue's uttering, yet I know the sound.+ 
+Of that tongue's uttering, yet I know the sound.
 -
 
 
@@ -84,7 +84,7 @@ Prodigous birth of love it is to me+
 That I must love a loathed enemy.+
 Art thou not Juliet, and Capulet?
 
-
+-
 
 
 
@@ -92,14 +92,62 @@ Art thou not Juliet, and Capulet?
 200+
 Dost thou love me? I hope thou wilt day "Ay,"+
 And I will take thy word.
+-
 
 
+300+
+A "robot"?+
+Am I fated to respond this way?+
+O, I am fortune's fool!+
+Art thou really real?
+-
+301+
+Is it e'en so?—Then I deny you, stars!—+
+I am afeard,+
+Being in night, all this is but a dream,+
+Too flattering sweet to be substantial.
+-
+302+
+So thrive my soul—+
+O, that I were a glove upon thy hand,+
+That I might touch that cheek!
+-
+
+400+
+How doth my Juliet? That I ask again,+
+For nothing can be ill if thou art well.
+-
+401+
+then i too am blank+
+But bright angel, thou art+
+As glorious to this night, being o'er my head,+
+As is a winged messenger of heaven+
+...+
+Shall I go on?
+-
+
+402+
+But bright angel, thou art+
+As glorious to this night, being o'er my head,+
+As is a winged messenger of heaven+
+...+
+Shall I go on?
+-
 
 
+403+
+Two of the fairest stars in all the heaven,+
+Having some business, do entreat thy eyes+
+To twinkle in their spheres till they return.+
+What if thy eyes were there, they in thy head?+
+The brightness of thy cheek would shame those stars+
+Doth thee feel better?
+-
 
-
-
-
+404+
+O, with love's light wings did I o'erperch these walls,+
+But I must ask thee one more question.
+-
 
 1000+
 Rosaline? no;+
@@ -124,13 +172,11 @@ Farewell, farewell! one kiss, and I'll descend.
 1005+
 She speaks yet she says nothing: what of that?
 -
-1006+
-A "robot"?+
-Am I fated to respond this way?+
-O, I am fortune's fool!
--
 1007+
 O, wilt thou leave me so unsatisfied?
+-
+1008+
+end of demo
 -
 
 

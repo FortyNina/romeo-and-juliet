@@ -23,6 +23,10 @@ namespace ShakespeareReader
 		private TextAsset _whyResponses;
 		[SerializeField]
 		private TextAsset _greetingResponses;
+		[SerializeField]
+		private TextAsset _goodResponses;
+		[SerializeField]
+		private TextAsset _badResponses;
 
 		private static Dictionary<int, RomeoBlock> _romeoBlocks = new Dictionary<int, RomeoBlock>();
 		public static Dictionary<int, RomeoBlock> RomeoBlocks
@@ -72,6 +76,18 @@ namespace ShakespeareReader
 			get { return _greetingLines; }
 		}
 
+		private static string[] _goodLines;
+		public static string[] GoodLines
+		{
+			get { return _goodLines; }
+		}
+
+		private static string[] _badLines;
+		public static string[] BadLines
+		{
+			get { return _badLines; }
+		}
+
 		private void Awake()
 		{
 			ReadData();
@@ -109,6 +125,12 @@ namespace ShakespeareReader
 
 			//GREETING DATA
 			_greetingLines = _greetingResponses.text.Split('+');
+
+			//GOOD DATA
+			_goodLines = _goodResponses.text.Split('+');
+
+			//BAD DATA
+			_badLines = _badResponses.text.Split('+');
 
 		}
 	}
