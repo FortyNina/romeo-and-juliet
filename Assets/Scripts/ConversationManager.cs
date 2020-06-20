@@ -14,6 +14,7 @@ public class ConversationManager : MonoBehaviour
     public static string RomeoName = "Romeo";
 	public static string JulietName = "Juliet";
 
+
     [SerializeField]
     private UIFiller ui;
 
@@ -22,6 +23,7 @@ public class ConversationManager : MonoBehaviour
     private RomeoBlock _currentRomeoResponse;
     private RomeoBlock _currentImportantRomeoResponse;
     private ConversationBlock _currentImportantState;
+	private string _currentRomeoStageDirection = "";
 
     private bool _julietFlagDirty = false;
 
@@ -31,7 +33,8 @@ public class ConversationManager : MonoBehaviour
     private void Start()
     {
         _currentRomeoResponse = GetRomeoBlock(1);
-        ui.DisplayResponse(_currentRomeoResponse);
+		ui.DisplayStageDirection("Enter Romeo, Juliet.");
+        ui.DisplayResponse(_currentRomeoResponse, _currentRomeoStageDirection);
 
         _blockState.Add(ConversationBlock.Introduction, 0);
         _blockState.Add(ConversationBlock.FamilyStuff, 0);
@@ -52,17 +55,19 @@ public class ConversationManager : MonoBehaviour
         }
     }
 
-    public void ReceiveJulietResponse(string s)
-    {
-        _currentJulietResponse = new JulietBlock(s);
-        _julietFlagDirty = true;
-        ui.DisplayResponse(_currentJulietResponse);
+	public void ReceiveJulietResponse(string s)
+	{
+		_currentJulietResponse = new JulietBlock(s);
+		_julietFlagDirty = true;
+		EmotionChecker.UpdateJulietEmotion(s);
+        ui.DisplayResponse(_currentJulietResponse, EmotionChecker.GetJulietStageDirection(s));
     }
 
 
     private void GetRomeoResponse(string s)
     {
         _currentRomeoResponse = GetRomeoBlock(1005);
+		_currentRomeoStageDirection = "";
 
 		#region Introduction Blocks
 		//INTRODUCTION SECTION=======================================================================================
@@ -95,6 +100,7 @@ public class ConversationManager : MonoBehaviour
 					{
 						//go to family things
 						_currentRomeoResponse = GetRomeoBlock(100); //sad hours seem long
+						_currentRomeoStageDirection = "somberly";
 						state = ConversationBlock.FamilyStuff;
 					}
 				}
@@ -364,7 +370,7 @@ public class ConversationManager : MonoBehaviour
 
 
 
-		ui.DisplayResponse(_currentRomeoResponse);
+		ui.DisplayResponse(_currentRomeoResponse, _currentRomeoStageDirection);
 
     }
 

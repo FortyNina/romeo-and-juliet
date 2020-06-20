@@ -15,8 +15,7 @@ public class Line : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
-		gui.color = new Color(gui.color.r, gui.color.g, gui.color.b, GetAlphaFromHeight(transform.position.y));
-		Debug.Log(transform.position.y);
+		//gui.color = new Color(gui.color.r, gui.color.g, gui.color.b, GetAlphaFromHeight(transform.position.y));
     }
 
 	private float GetAlphaFromHeight(float y)

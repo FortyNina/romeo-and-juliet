@@ -12,7 +12,16 @@ public class UIFiller : MonoBehaviour
     private Color _romeoCol;
 
     [SerializeField]
+    private Color _romeoStageDirCol;
+
+    [SerializeField]
     private Color _julietCol;
+
+    [SerializeField]
+    private Color _julietStageDirCol;
+
+    [SerializeField]
+    private Color _neutralStageDirCol;
 
     [Space(5)]
     [Header("Script Resources")]
@@ -27,6 +36,9 @@ public class UIFiller : MonoBehaviour
     private GameObject _nameLinePrefab;
 
     [SerializeField]
+    private GameObject _directionLinePrefab;
+
+    [SerializeField]
     private GameObject _contentParent;
 
 	[SerializeField]
@@ -36,30 +48,42 @@ public class UIFiller : MonoBehaviour
     private AnswerRecorder _recorder;
 
 
-    public void DisplayResponse(TextBlock block)
+    public void DisplayResponse(TextBlock block, string stageDirection)
     {
         if(block.speaker == SpeakerName.Juliet)
         {
-            StartCoroutine(DisplayEachLine(block.TextLines, 0, 0, _julietCol, ConversationManager.JulietName, SpeakerName.Juliet));
+            StartCoroutine(DisplayEachLine(block.TextLines, 0, 0, _julietCol, ConversationManager.JulietName, SpeakerName.Juliet, stageDirection, _julietStageDirCol));
             _recorder.WriteLine(block.FullText, ConversationManager.JulietName);
         }
         else if(block.speaker == SpeakerName.Romeo)
         {
-            StartCoroutine(DisplayEachLine(block.TextLines, 2f, .5f, _romeoCol, ConversationManager.RomeoName, SpeakerName.Romeo));
+            StartCoroutine(DisplayEachLine(block.TextLines, 2f, .5f, _romeoCol, ConversationManager.RomeoName, SpeakerName.Romeo, stageDirection, _romeoStageDirCol));
             _recorder.WriteLine(block.FullText, ConversationManager.RomeoName);
 
         }
     }
 
-    private IEnumerator DisplayEachLine(string[] lines, float initialWaitTime, float inbetweenWaitTime, Color col, string name, SpeakerName speaker)
+    public void DisplayStageDirection(string direction)
+    {
+        string dirHex = ColorUtility.ToHtmlStringRGBA(_neutralStageDirCol);
+        CreateLine("<color=#" + dirHex + ">[<i>" + direction + "</i> ]</color>", _neutralStageDirCol, _directionLinePrefab);
+    }
+
+    private IEnumerator DisplayEachLine(string[] lines, float initialWaitTime, float inbetweenWaitTime, Color col, string name, SpeakerName speaker, string stageDir, Color stageColor)
     {
         yield return new WaitForSeconds(initialWaitTime);
+
+        string dirHex = ColorUtility.ToHtmlStringRGBA(stageColor);
+        Debug.Log(dirHex);
 
         //Line break
         CreateLine("", col, _blankLinePrefab);
 
         //Put Name
-        CreateLine(name.ToString().ToUpper(), col, _nameLinePrefab);
+        if(stageDir == "")
+            CreateLine("<b>" + name.ToString().ToUpper() + "</b>", col, _nameLinePrefab);
+        else
+            CreateLine("<b>" + name.ToString().ToUpper() + "</b> <color=#"+dirHex+">[<i>" + stageDir + "</i> ]</color>", col, _nameLinePrefab);
 
         for (int i = 0; i < lines.Length; i++)
         {
@@ -84,6 +108,8 @@ public class UIFiller : MonoBehaviour
         gui.text = txt;
         gui.color = col;
     }
+
+
 
 
 
