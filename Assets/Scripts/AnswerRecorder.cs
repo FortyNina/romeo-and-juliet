@@ -2,18 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Net.Mail;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
+using UnityEngine.UI;
+using TMPro;
 
 public class AnswerRecorder : MonoBehaviour
 {
-    [SerializeField]
-    private string _fileName;
+    private string _email = "";
+    private string _password = "";
 
     [SerializeField]
     private bool _recordAnswers;
 
+    [SerializeField]
+    private bool _sendEmail;
+
+    [Space(5)]
+    [SerializeField]
+    private TMP_InputField _inputField;
+
+    [SerializeField]
+    private TextMeshProUGUI _submittedClarification;
+
+    [SerializeField]
+    private string _fileName;
+
     private Stream sr;
 
     private List<string> _fullRecordedText = new List<string>();
+
+
 
     private void Start()
     {
@@ -24,11 +45,38 @@ public class AnswerRecorder : MonoBehaviour
         }
     }
 
+    public void SendEmail()
+    {
+        string name = _inputField.text;
+        if (_sendEmail)
+        {
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(_email);
+            mail.To.Add(_email);
+            mail.Subject = "Romeo and Juliet Test Data From " + name;
+            string text = "";
+            for (int i = 0; i < _fullRecordedText.Count; i++)
+                text += _fullRecordedText[i];
+            mail.Body = text;
+            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+
+            smtpServer.Port = 587;
+            smtpServer.Credentials = new System.Net.NetworkCredential(_email, _password) as ICredentialsByHost;
+            smtpServer.EnableSsl = true;
+            ServicePointManager.ServerCertificateValidationCallback =
+            delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+            { return true; };
+            smtpServer.Send(mail);
+            StartCoroutine(DisplaySubmitClarification());
+        }
+    }
+
 
     public void WriteLine(string s, string speakerName)
     {
         _fullRecordedText.Add(speakerName + ": " + s.Trim());
-        _fullRecordedText.Add(" ");
+        _fullRecordedText.Add("\n");
+        _fullRecordedText.Add("\n");
         if (_recordAnswers)
         {
             var sr = new StreamWriter(_fileName);
@@ -40,6 +88,12 @@ public class AnswerRecorder : MonoBehaviour
             
             sr.Close();
         }
+    }
+
+    IEnumerator DisplaySubmitClarification()
+    {
+        yield return new WaitForSeconds(1f);
+        _submittedClarification.gameObject.SetActive(true); 
     }
 
    

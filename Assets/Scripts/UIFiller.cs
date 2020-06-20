@@ -80,6 +80,7 @@ public class UIFiller : MonoBehaviour
         GameObject g = Instantiate(lineType, Vector3.zero, Quaternion.identity);
         g.transform.parent = _contentParent.transform;
         TextMeshProUGUI gui = g.GetComponent<TextMeshProUGUI>();
+        gui.transform.localScale = new Vector3(1, 1, 1);
         gui.text = txt;
         gui.color = col;
     }
