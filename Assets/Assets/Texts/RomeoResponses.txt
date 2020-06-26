@@ -1,14 +1,14 @@
 ﻿001+
 But, soft! what light through yonder window breaks?+
 It is the east, and you are the sun.+
-Arise, fair sun, and kill the envious moon.
+Arise, fair sun, and kill the envious moon*.
 -
 002+
 She speaks:+
-O, speak again, bright angel!
+O, speak again, bright angel*!
 -
 003+
-It is my lady, O, it is my love!
+It is my lady, O, it is my love*!
 -
 
 
@@ -16,47 +16,47 @@ It is my lady, O, it is my love!
 
 
 100+
-Ay me! sad hours seem long.
+Ay me! sad hours seem long*.
 -
 101+
-I know not how to tell thee who I am:+
+I know not how to tell thee who I am:*+
 My name, dear saint, is hateful to myself
 -
 102+
-it is an enemy to thee+
+it is an enemy to thee*+
 Had I it written, I would tear the word.
 -
 103+
 I am a dog of the house of Montague+
-Shall I deny my father and refuse my name?
+Shall I deny my father and refuse my name*?
 -
 104+
-What shouldst i change mine own family name to? 
+What shouldst i change mine own family name to*? 
 -
 105+
 new name+
 Call me but love, and I'll be new baptized;+
 Henceforth I never will be Montague.+
-But if thy kinsmen do see me, they will murder me
+But if thy kinsmen do see me, they will murder me*
 -
 106+
 my life is my foe's debt.+
-Art thou not a Capulet?
+Art thou not a Capulet?*
 -
 107+
 Ay, so I fear; the more is my unrest.+
-Thou art thyself, though not a Capulet.+
+Thou art thyself, though not a Capulet.*+
 What's Capulet? It is nor hand, nor foot,+
 Nor arm, nor face, nor any other part+
 Belonging to a woman. O, be some other name!
 -
 108+
 O blessed, blessed night!+
-What is thy family name?
+What is thy family name?*
 -
 109+
 new name+
-Shall I take thee at thy word?+
+Shall I take thee at thy word?*+
 My ears have not yet drunk a hundred words+
 Of that tongue's uttering, yet I know the sound.
 -
@@ -69,12 +69,12 @@ new name+
 Shall I take thy own name?+
 Call me but love, and I'll be new baptized;+
 Henceforth I never will be a Montague.+
-But if they kinsmen do see me, they will murder me
+But if they kinsmen do see me, they will murder me*
 -
 151+
 new name+
 Romeo, and a Montague,+
-The only son of your great enemy.
+The only son of your great enemy.*
 -
 
 175+
@@ -82,7 +82,7 @@ My only love sprung from my only hate!+
 Too early seen unknown, and known too late!+
 Prodigous birth of love it is to me+
 That I must love a loathed enemy.+
-Art thou not Juliet, and Capulet?
+Art thou not Juliet, and Capulet?*
 
 -
 
@@ -90,7 +90,7 @@ Art thou not Juliet, and Capulet?
 
 
 200+
-Dost thou love me? I hope thou wilt day "Ay,"+
+Dost thou love me? I hope thou wilt day "Ay,"*+
 And I will take thy word.
 -
 
@@ -99,22 +99,22 @@ And I will take thy word.
 A "robot"?+
 Am I fated to respond this way?+
 O, I am fortune's fool!+
-Art thou really real?
+Art thou really real?*
 -
 301+
-Is it e'en so?—Then I deny you, stars!—+
+Is it e'en so?—Then I deny you, stars!—*+
 I am afeard,+
 Being in night, all this is but a dream,+
 Too flattering sweet to be substantial.
 -
 302+
-So thrive my soul—+
+So thrive my soul—*+
 O, that I were a glove upon thy hand,+
 That I might touch that cheek!
 -
 
 400+
-How doth my Juliet? That I ask again,+
+How doth my Juliet? That I ask again,*+
 For nothing can be ill if thou art well.
 -
 401+
@@ -123,7 +123,7 @@ But bright angel, thou art+
 As glorious to this night, being o'er my head,+
 As is a winged messenger of heaven+
 ...+
-Shall I go on?
+Shall I go on?*
 -
 
 402+
@@ -131,7 +131,7 @@ But bright angel, thou art+
 As glorious to this night, being o'er my head,+
 As is a winged messenger of heaven+
 ...+
-Shall I go on?
+Shall I go on?*
 -
 
 
@@ -141,46 +141,46 @@ Having some business, do entreat thy eyes+
 To twinkle in their spheres till they return.+
 What if thy eyes were there, they in thy head?+
 The brightness of thy cheek would shame those stars+
-Doth thee feel better?
+Doth thee feel better?*
 -
 
 404+
 O, with love's light wings did I o'erperch these walls,+
-But I must ask thee one more question.
+But I must ask thee one more question.*
 -
 
 1000+
-Rosaline? no;+
+Rosaline? no;*+
 I have forgotten that name, and that name's woe.
 -
 1001+
 Good night, good night! parting is such+
 sweet sorrow.+
-That I shall say good night till it be morrow.
+That I shall say good night till it be morrow.*
 -
 1002+
-Thank thee+
+Thank thee*+
 O, that I were a glove upon thy hand,+
 That I might touch that cheek!
 -
 1003+
-No, fair saint, if thee dislike
+No, fair saint, if thee dislike*
 -
 1004+
-Farewell, farewell! one kiss, and I'll descend.
+Farewell, farewell! one kiss, and I'll descend.*
 -
 1005+
 She speaks yet she says nothing: what of that?
 -
 1007+
-O, wilt thou leave me so unsatisfied?
+O, wilt thou leave me so unsatisfied*?
 -
 1008+
-end of demo
+end of demo*
 -
 
 
 2000+
-O, thou doth teach the torches to burn bright!+
+O, thou doth teach the torches to burn bright!*+
 For I ne'er saw tru beauty till this night.
 

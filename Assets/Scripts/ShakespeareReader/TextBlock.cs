@@ -47,11 +47,7 @@ namespace ShakespeareReader
 			_textLines[lineNumber] = replacement;
 		}
 
-		public void AddLine(string lineToAdd)
-		{
-			_textLines = BreakText(_fullText + "+" + lineToAdd);
-
-		}
+		
 
 	}
 }

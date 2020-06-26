@@ -20,9 +20,20 @@ namespace ShakespeareReader
 
 
 
-		public static string GetJulietStageDirection(string s)
+		public static string GetJulietStageDirection(string s, float timeLapse)
 		{
-			string direction = "";
+
+            if(timeLapse < 5)
+            {
+                if (Random.Range(0, 5) < 7)
+                {
+                    if (Random.Range(0, 10) < 5)
+                    {
+                        return "hurriedly";
+                    }
+                    return "without hesitation";
+                }
+            }
 
             if (s.Contains("!"))
             {
@@ -30,11 +41,9 @@ namespace ShakespeareReader
                 {
                     if (TextChecker.CheckYesContains(s))
                     {
-                        direction = "eagerly";
-                        return direction;
+                        return "eagerly";
                     }
-                    direction = "energetically";
-                    return direction;
+                    return "energetically";
                 }
             }
 
@@ -42,14 +51,22 @@ namespace ShakespeareReader
             {
                 if (Random.Range(0, 10) < 7)
                 {
-                    direction = "coldly";
-                    return direction;
+                    int rand = Random.Range(0, 5);
+                    if (rand == 0)
+                        return "indifferently";
+                    else if (rand == 1)
+                        return "callously";
+                    else if (rand == 2)
+                        return "annoyed";
+                    else
+                        return "coldly";
+
                 }
             }
 
 
 
-			return direction;
+			return "";
 		}
 
 		public static void UpdateJulietEmotion(string s)

@@ -3,13 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using System;
+using System.Text.RegularExpressions;
 
 
 namespace ShakespeareReader
 {
-
+	
 	public class RomeoBlock : TextBlock
 	{
+
+		private string _pattern = @"[\*]";
+		private Regex _rgx;
+
+		private string _lineOfImportance = "";
+		public string LineOfImportance
+        {
+            get { return _lineOfImportance; }
+			set { _lineOfImportance = value; }
+        }
 
 		//Associated conversation ID
 		private int _textId = -1;
@@ -26,10 +37,13 @@ namespace ShakespeareReader
 
 		public RomeoBlock(string txt)
 		{
+			_rgx = new Regex(_pattern);
 			_fullText = txt;
 			_textId = FindTextID(txt);
 			string stripped = StripID(txt);
 			_textLines = BreakText(stripped);
+			_lineOfImportance = FindLineOfImportance(_textLines);
+			StripAsterisk();
 			speaker = SpeakerName.Romeo;
 
 		}
@@ -47,8 +61,29 @@ namespace ShakespeareReader
 			return txt.Substring(index);
 		}
 
+		private string FindLineOfImportance(string[] textLines)
+        {
+			for(int i = 0;i < textLines.Length; i++)
+            {
+				if (textLines[i].Contains("*"))
+					return _rgx.Replace(textLines[i], "");
+            }
+			return "";
+        }
 
-		private char[] _removalChars = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', _lineBreakChar };
+		private void StripAsterisk()
+        {
+			for (int i = 0; i < _textLines.Length; i++)
+			{
+				if (_textLines[i].Contains("*"))
+					_textLines[i] =  _rgx.Replace(_textLines[i], "");
+			}
+
+		}
+
+		
+
+
 
 
 	}

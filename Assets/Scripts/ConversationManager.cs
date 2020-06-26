@@ -24,10 +24,16 @@ public class ConversationManager : MonoBehaviour
     private RomeoBlock _currentImportantRomeoResponse;
     private ConversationBlock _currentImportantState;
 	private string _currentRomeoStageDirection = "";
+	private string _currentLineOfImportance = "";
+
+	private int _slipups = 0;
 
     private bool _julietFlagDirty = false;
 
     private Dictionary<ConversationBlock, int> _blockState = new Dictionary<ConversationBlock, int>();
+
+	private float _lapsedTime = 0;
+	private bool _pauseLineCreated = false;
 
 
     private void Start()
@@ -53,14 +59,27 @@ public class ConversationManager : MonoBehaviour
             _julietFlagDirty = false;
             GetRomeoResponse(_currentJulietResponse.FullText);
         }
-    }
+
+		_lapsedTime += Time.deltaTime;
+
+		if(!_pauseLineCreated && _lapsedTime > 20)
+        {
+			_pauseLineCreated = true;
+			ui.DisplayStageDirection("A pause.");
+		}
+	}
 
 	public void ReceiveJulietResponse(string s)
 	{
 		_currentJulietResponse = new JulietBlock(s);
 		_julietFlagDirty = true;
 		EmotionChecker.UpdateJulietEmotion(s);
-        ui.DisplayResponse(_currentJulietResponse, EmotionChecker.GetJulietStageDirection(s));
+		if(s == "")
+			ui.DisplayStageDirection("Silence.");
+		else
+			ui.DisplayResponse(_currentJulietResponse, EmotionChecker.GetJulietStageDirection(s, _lapsedTime));
+		_lapsedTime = 0;
+		_pauseLineCreated = false;
     }
 
 
@@ -107,11 +126,18 @@ public class ConversationManager : MonoBehaviour
 				else if (TextChecker.CheckGreetingContains(s))
 				{
 					_currentRomeoResponse = GetRomeoBlock(3);
-
+					_blockState[state] = 2;
 
 				}
 				//  else if() asking about identity
 				//family region
+			}
+			else if(_blockState[state] == 2)
+            {
+				//go to family things
+				_currentRomeoResponse = GetRomeoBlock(100); //sad hours seem long
+				_currentRomeoStageDirection = "somberly";
+				state = ConversationBlock.FamilyStuff;
 			}
 		}
 		//===========================================================================================================
@@ -194,14 +220,14 @@ public class ConversationManager : MonoBehaviour
 
 			else if (_blockState[state] == 6)
 			{
-				if (TextChecker.CheckNo(s))
+				if (TextChecker.CheckNoContains(s))
 				{
 					//no i am not a capulet
 					_currentRomeoResponse = GetRomeoBlock(108);
 
 					_blockState[state] = 7;
 				}
-				else if (TextChecker.CheckYes(s))
+				else if (TextChecker.CheckYesContains(s))
 				{
 					//yes, i am a capulet
 					_currentRomeoResponse = GetRomeoBlock(107);
@@ -368,7 +394,19 @@ public class ConversationManager : MonoBehaviour
 		//===========================================================================================================
 		#endregion
 
+		_slipups++;
+		if (_currentRomeoResponse.LineOfImportance != "")
+		{
+			_currentLineOfImportance = _currentRomeoResponse.LineOfImportance;
+			_slipups = 0;
+		}
 
+		if(_slipups > 1)
+        {
+			Debug.Log(_currentRomeoResponse.FullText);
+			_currentRomeoResponse = GetHelperRomeoBlock(_currentRomeoResponse.FullText);
+			
+        }
 
 		ui.DisplayResponse(_currentRomeoResponse, _currentRomeoStageDirection);
 
@@ -405,5 +443,11 @@ public class ConversationManager : MonoBehaviour
 		}
 		return 2000;
 	}
+
+	private RomeoBlock GetHelperRomeoBlock(string fullText)
+    {
+		RomeoBlock rb = new RomeoBlock(fullText + "+" + _currentLineOfImportance);
+		return rb;
+    }
 
 }

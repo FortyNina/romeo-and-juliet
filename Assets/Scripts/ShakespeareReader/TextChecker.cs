@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 namespace ShakespeareReader
 {
@@ -148,13 +149,17 @@ namespace ShakespeareReader
 
 		private static bool CheckAgainstATextContains(string s, string[] list)
 		{
+
+			string pattern = @"[!?.,'1234567890-]";
+			Regex rgx = new Regex(pattern);
 			string lower = s.ToLower();
 			lower = lower.Trim();
-			lower.Replace("’", "");
-			lower.Replace("!", "");
-			lower.Replace("?", "");
-			lower.Replace(".", "");
-			lower.Replace(",", "");
+
+			lower = rgx.Replace(lower, "");
+
+			Debug.Log(lower);
+
+			
 
 
 			for (int i = 0; i < list.Length; i++)

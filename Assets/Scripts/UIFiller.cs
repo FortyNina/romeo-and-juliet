@@ -65,6 +65,9 @@ public class UIFiller : MonoBehaviour
 
     public void DisplayStageDirection(string direction)
     {
+        //Line break
+        CreateLine("", _neutralStageDirCol, _blankLinePrefab);
+
         string dirHex = ColorUtility.ToHtmlStringRGBA(_neutralStageDirCol);
         CreateLine("<color=#" + dirHex + ">[<i>" + direction + "</i> ]</color>", _neutralStageDirCol, _directionLinePrefab);
     }
@@ -74,7 +77,6 @@ public class UIFiller : MonoBehaviour
         yield return new WaitForSeconds(initialWaitTime);
 
         string dirHex = ColorUtility.ToHtmlStringRGBA(stageColor);
-        Debug.Log(dirHex);
 
         //Line break
         CreateLine("", col, _blankLinePrefab);
