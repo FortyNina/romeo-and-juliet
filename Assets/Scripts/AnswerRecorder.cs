@@ -61,7 +61,7 @@ public class AnswerRecorder : MonoBehaviour
             SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
 
             smtpServer.Port = 587;
-            smtpServer.Credentials = new System.Net.NetworkCredential(_email, _password) as ICredentialsByHost;
+            smtpServer.Credentials = new NetworkCredential(_email, _password);
             smtpServer.EnableSsl = true;
             ServicePointManager.ServerCertificateValidationCallback =
             delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
