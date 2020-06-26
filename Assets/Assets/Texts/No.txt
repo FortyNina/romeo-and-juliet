@@ -3,4 +3,6 @@ nope+
 nah+
 n+
 nay+
-not
+not+
+cant+
+cannot

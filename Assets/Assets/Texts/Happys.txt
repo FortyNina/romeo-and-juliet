@@ -6,4 +6,8 @@ awesome+
 excited+
 fine+
 peachy+
-well
+well+
+ok+
+superb+
+wonderful+
+glad

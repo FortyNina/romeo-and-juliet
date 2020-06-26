@@ -18,6 +18,12 @@ namespace ShakespeareReader
 			get { return _enthusiasmLevel; }
 		}
 
+        private static int _affectionLevel = 10;
+        public int AffectionLevel
+        {
+            get { return _affectionLevel; }
+        }
+
 
 
 		public static string GetJulietStageDirection(string s, float timeLapse)
@@ -90,6 +96,11 @@ namespace ShakespeareReader
             {
 				_indifferenceLevel++;
             }
+
+
+
+
+
         }
 
 

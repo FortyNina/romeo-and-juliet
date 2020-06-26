@@ -395,8 +395,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -81, y: 6}
-  m_SizeDelta: {x: 586.25, y: 392.3}
+  m_AnchoredPosition: {x: -81, y: 21}
+  m_SizeDelta: {x: 586.3, y: 371.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &324247346
 MonoBehaviour:
@@ -1127,6 +1127,7 @@ GameObject:
   - component: {fileID: 796469057}
   - component: {fileID: 796469056}
   - component: {fileID: 796469058}
+  - component: {fileID: 796469059}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1152,7 +1153,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.29411766, g: 0.15294118, b: 0.21960786, a: 0.011764706}
+  m_BackGroundColor: {r: 0.3207547, g: 0.08321467, b: 0.20560032, a: 0.011764706}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1274,7 +1275,7 @@ MonoBehaviour:
   sharedProfile: {fileID: 11400000, guid: f18a4dac646fe4665bb108f755a70a26, type: 2}
   isGlobal: 1
   blendDistance: 2.98
-  weight: 1
+  weight: 0.804
   priority: 0
 --- !u!114 &796469058
 MonoBehaviour:
@@ -1288,6 +1289,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5297e9c7943cd48968fc03ff7a9826fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &796469059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796469052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb00aae5cd9344bf92e3352f562a427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _wantedAspectRatio: 1.7777777
 --- !u!1 &862646196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,8 +1628,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -95, y: -213}
-  m_SizeDelta: {x: 600, y: 30}
+  m_AnchoredPosition: {x: -0.000038146973, y: -196}
+  m_SizeDelta: {x: 800, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1152895472
 MonoBehaviour:
@@ -2295,7 +2309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.73, y: 0}
+  m_AnchoredPosition: {x: -82.3, y: 0}
   m_SizeDelta: {x: 568.53, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1592376237
@@ -2452,7 +2466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.73, y: 0}
+  m_AnchoredPosition: {x: -82.3, y: 0}
   m_SizeDelta: {x: 568.53, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1652837361
@@ -2781,9 +2795,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _romeoCol: {r: 0.6797859, g: 0.59131366, b: 0.8301887, a: 1}
-  _romeoStageDirCol: {r: 0.58431375, g: 0.54509807, b: 0.64705884, a: 0.54509807}
-  _julietCol: {r: 1, g: 0.86372775, b: 0.4764151, a: 1}
-  _julietStageDirCol: {r: 1, g: 0.86274517, b: 0.49411768, a: 0.54509807}
+  _romeoStageDirCol: {r: 0.6797859, g: 0.59131366, b: 0.8301887, a: 1}
+  _julietCol: {r: 0.8962264, g: 0.7780777, b: 0.4438857, a: 1}
+  _julietStageDirCol: {r: 0.8962264, g: 0.7780777, b: 0.4438857, a: 1}
   _neutralStageDirCol: {r: 0.9245283, g: 0.87655747, b: 0.89869785, a: 1}
   _linePrefab: {fileID: 5802307550837975215, guid: adcdeaf5bc95a438ca7abe0dfafc45fd,
     type: 3}

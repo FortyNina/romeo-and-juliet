@@ -8,4 +8,6 @@ anxiety+
 depression+
 crying+
 terrible+
-horrible
+horrible+
+not ok+
+not great

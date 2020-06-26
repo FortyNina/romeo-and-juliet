@@ -145,9 +145,30 @@ Doth thee feel better?*
 -
 
 404+
-O, with love's light wings did I o'erperch these walls,+
-But I must ask thee one more question.*
+O, with love's light wings did I o'erperch these walls*,+
 -
+
+405+
+Ah, Juliet, if the measure of thy joy+
+Be heaped like mine,+
+Unfold the imagined happiness that both+
+Receive in either by this dear encounter.+
+It is enough, but may I call thou mine?*
+-
+
+406+
+O serpant heart, hid with a flowering face!+
+Did ever dragon keep so fair a cave?*+
+
+-
+
+
+
+
+
+
+
+
 
 1000+
 Rosaline? no;*+
@@ -173,7 +194,7 @@ Farewell, farewell! one kiss, and I'll descend.*
 She speaks yet she says nothing: what of that?
 -
 1007+
-O, wilt thou leave me so unsatisfied*?
+O, wilt thou leave me so unsatisfied?
 -
 1008+
 end of demo*
@@ -181,6 +202,6 @@ end of demo*
 
 
 2000+
-O, thou doth teach the torches to burn bright!*+
+O, thou doth teach the torches to burn bright!+
 For I ne'er saw tru beauty till this night.
 

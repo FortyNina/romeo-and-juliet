@@ -129,6 +129,12 @@ public class ConversationManager : MonoBehaviour
 					_blockState[state] = 2;
 
 				}
+				else if (TextChecker.CheckIndifference(s) || TextChecker.CheckNoContains(s) || s.ToLower().Contains("romeo"))
+                {
+					_currentRomeoResponse = GetRomeoBlock(400);
+					state = ConversationBlock.YourEmotion;
+					_blockState[state] = 0;
+				}
 				//  else if() asking about identity
 				//family region
 			}
@@ -224,7 +230,7 @@ public class ConversationManager : MonoBehaviour
 				{
 					//no i am not a capulet
 					_currentRomeoResponse = GetRomeoBlock(108);
-
+					_currentRomeoStageDirection = "relieved";
 					_blockState[state] = 7;
 				}
 				else if (TextChecker.CheckYesContains(s))
@@ -294,7 +300,6 @@ public class ConversationManager : MonoBehaviour
 		//CHATTING SECTION=======================================================================================
 		else if (state == ConversationBlock.JustChatting)
 		{
-			Debug.Log("chatting");
 			if (CheckCasualConversation(s) >= 0)
 			{
 				_currentRomeoResponse = GetRomeoBlock(CheckCasualConversation(s));
@@ -305,13 +310,26 @@ public class ConversationManager : MonoBehaviour
 			}
 			else
 			{
-				if (_blockState[ConversationBlock.YourEmotion] < 5)
+				if (_blockState[ConversationBlock.FamilyStuff] < 5) //TODO: CHANGE OUT 5
+				{
+					//go to family things
+					_currentRomeoResponse = GetRomeoBlock(100); //sad hours seem long
+					_currentRomeoStageDirection = "somberly";
+					state = ConversationBlock.FamilyStuff;
+				}
+				else if (_blockState[ConversationBlock.YourEmotion] < 2)
 				{
 					_currentRomeoResponse = GetRomeoBlock(400);
 					state = ConversationBlock.YourEmotion;
 					_blockState[state] = 0;
 				}
-            }
+                else
+                {
+					_currentRomeoResponse = GetRomeoBlock(1008);
+
+				}
+			}
+
 
 
 		}
@@ -342,6 +360,7 @@ public class ConversationManager : MonoBehaviour
 					{
 						_blockState[state] = 1;
 						_currentRomeoResponse = GetRomeoBlock(401);
+						_currentRomeoStageDirection = "concerned";
 						_currentRomeoResponse.ReplaceLine(0, "Then I too am " + s); //shall i go on?
 					}
 					else
@@ -352,7 +371,8 @@ public class ConversationManager : MonoBehaviour
 				}
                 else if (TextChecker.CheckGoodContains(s))
 				{
-                    //TODO
+					_blockState[state] = 3;
+					_currentRomeoResponse = GetRomeoBlock(405);
 				}
 			}
             else if(_blockState[state] == 1)
@@ -366,7 +386,7 @@ public class ConversationManager : MonoBehaviour
                 else if (TextChecker.CheckNoContains(s))
 				{
 					_blockState[state] = 3;
-					_currentRomeoResponse = GetRomeoBlock(404); //do u feel better?
+					_currentRomeoResponse = GetRomeoBlock(405); //do u feel better?
 				}
 			}
 
@@ -375,12 +395,11 @@ public class ConversationManager : MonoBehaviour
 				if (TextChecker.CheckYesContains(s))
 				{
 					_blockState[state] = 3;
-					_currentRomeoResponse = GetRomeoBlock(404); 
+					_currentRomeoResponse = GetRomeoBlock(405); 
 				}
 
 				else if (TextChecker.CheckNoContains(s))
 				{
-					//TODO
 					_blockState[state] = 3;
 					_currentRomeoResponse = GetRomeoBlock(1008);
 				}
@@ -388,8 +407,22 @@ public class ConversationManager : MonoBehaviour
 			}
             else if(_blockState[state] == 3)
 			{
-				_currentRomeoResponse = GetRomeoBlock(1008);
+                if (TextChecker.CheckNoContains(s))
+                {
+					_currentRomeoResponse = GetRomeoBlock(406);
+					_currentRomeoStageDirection = "devastated";
+					state = ConversationBlock.JustChatting;
+					_blockState[ConversationBlock.JustChatting] = 0;
+
+				}
+				else if (TextChecker.CheckYesContains(s))
+                {
+					_currentRomeoResponse = GetRomeoBlock(404);
+					state = ConversationBlock.JustChatting;
+					_blockState[ConversationBlock.JustChatting] = 0;
+				}
 			}
+			
 		}
 		//===========================================================================================================
 		#endregion
