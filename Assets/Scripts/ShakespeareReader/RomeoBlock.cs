@@ -22,12 +22,13 @@ namespace ShakespeareReader
 			set { _lineOfImportance = value; }
         }
 
-		//Associated conversation ID
-		private int _textId = -1;
-		public int TextId
-		{
-			get { return _textId; }
-		}
+		
+
+		private int _julietId = -1;
+		public int JulietId
+        {
+            get { return _julietId; }
+        }
 
 		public RomeoBlock()
 		{
@@ -40,6 +41,7 @@ namespace ShakespeareReader
 			_rgx = new Regex(_pattern);
 			_fullText = txt;
 			_textId = FindTextID(txt);
+			_julietId = FindJulietID(txt);
 			string stripped = StripID(txt);
 			_textLines = BreakText(stripped);
 			_lineOfImportance = FindLineOfImportance(_textLines);
@@ -51,14 +53,15 @@ namespace ShakespeareReader
 		private int FindTextID(string txt)
 		{
 			string[] a = txt.Split(_lineBreakChar);
-			return int.Parse(a[0]);
+			string[] b = a[0].Split('/');
+			return int.Parse(b[0]);
 		}
 
-		private string StripID(string txt)
-		{
+		private int FindJulietID(string txt)
+        {
 			string[] a = txt.Split(_lineBreakChar);
-			int index = a[0].Length + 1;
-			return txt.Substring(index);
+			string[] b = a[0].Split('/');
+			return int.Parse(b[1]);
 		}
 
 		private string FindLineOfImportance(string[] textLines)

@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 310331981}
   - component: {fileID: 310331982}
   m_Layer: 5
-  m_Name: AnswerRecorderCollection
+  m_Name: AnswerRecorderGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   sharedProfile: {fileID: 11400000, guid: f18a4dac646fe4665bb108f755a70a26, type: 2}
   isGlobal: 1
   blendDistance: 2.98
-  weight: 0.804
+  weight: 0.654
   priority: 0
 --- !u!114 &796469058
 MonoBehaviour:
@@ -2806,6 +2806,8 @@ MonoBehaviour:
   _nameLinePrefab: {fileID: 5133880394265953106, guid: f9aae237f89ea4aa7b4d8649865d2f28,
     type: 3}
   _directionLinePrefab: {fileID: 7457569892490500407, guid: 463d08bcff43949bcaf406cdf45ea8df,
+    type: 3}
+  _sceneLinePrefab: {fileID: 7457569892490500407, guid: d062718af788f4adeb595617551d699c,
     type: 3}
   _contentParent: {fileID: 282800913}
   _inputField: {fileID: 1152895472}

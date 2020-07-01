@@ -10,4 +10,5 @@ crying+
 terrible+
 horrible+
 not ok+
-not great
+not great+
+upset

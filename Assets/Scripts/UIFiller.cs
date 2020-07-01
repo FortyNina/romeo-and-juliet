@@ -39,6 +39,9 @@ public class UIFiller : MonoBehaviour
     private GameObject _directionLinePrefab;
 
     [SerializeField]
+    private GameObject _sceneLinePrefab;
+
+    [SerializeField]
     private GameObject _contentParent;
 
 	[SerializeField]
@@ -70,6 +73,15 @@ public class UIFiller : MonoBehaviour
 
         string dirHex = ColorUtility.ToHtmlStringRGBA(_neutralStageDirCol);
         CreateLine("<color=#" + dirHex + ">[<i>" + direction + "</i> ]</color>", _neutralStageDirCol, _directionLinePrefab);
+    }
+
+    public void DisplaySceneName(string sceneName)
+    {
+        CreateLine("", _neutralStageDirCol, _blankLinePrefab);
+        string dirHex = ColorUtility.ToHtmlStringRGBA(_neutralStageDirCol);
+        CreateLine("<color=#" + dirHex + ">" + sceneName + " </color>", _neutralStageDirCol, _sceneLinePrefab);
+
+
     }
 
     private IEnumerator DisplayEachLine(string[] lines, float initialWaitTime, float inbetweenWaitTime, Color col, string name, SpeakerName speaker, string stageDir, Color stageColor)

@@ -10,6 +10,8 @@ namespace ShakespeareReader
 		[SerializeField]
 		private TextAsset _romeoResponses;
 		[SerializeField]
+		private TextAsset _julietResponses;
+		[SerializeField]
 		private TextAsset _byeResponses;
 		[SerializeField]
 		private TextAsset _supResponses;
@@ -32,6 +34,12 @@ namespace ShakespeareReader
 		public static Dictionary<int, RomeoBlock> RomeoBlocks
 		{
 			get { return _romeoBlocks; }
+		}
+
+		private static Dictionary<int, JulietBlock> _julietBlocks = new Dictionary<int, JulietBlock>();
+		public static Dictionary<int, JulietBlock> JulietBlocks
+		{
+			get { return _julietBlocks; }
 		}
 
 		private static string[] _byeLines;
@@ -104,6 +112,15 @@ namespace ShakespeareReader
 				RomeoBlock rb = new RomeoBlock(chunks[i]);
 				RomeoBlocks.Add(rb.TextId, rb);
 			}
+
+			//JULIET DATA
+
+			chunks = _julietResponses.text.Split('-');
+			for(int i = 0; i < chunks.Length; i++)
+            {
+				JulietBlock jb = new JulietBlock(chunks[i], true);
+				JulietBlocks.Add(jb.TextId, jb);
+            }
 
 			//BYE DATA
 			_byeLines = _byeResponses.text.Split('+');

@@ -1,8 +1,9 @@
 ﻿no+
 nope+
 nah+
-n+
 nay+
 not+
 cant+
-cannot
+cannot+
+dont+
+do not

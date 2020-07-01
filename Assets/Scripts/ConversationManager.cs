@@ -25,6 +25,7 @@ public class ConversationManager : MonoBehaviour
     private ConversationBlock _currentImportantState;
 	private string _currentRomeoStageDirection = "";
 	private string _currentLineOfImportance = "";
+	private int _scene = 1;
 
 	private int _slipups = 0;
 
@@ -34,11 +35,13 @@ public class ConversationManager : MonoBehaviour
 
 	private float _lapsedTime = 0;
 	private bool _pauseLineCreated = false;
+	private bool _callLine = false;
 
 
     private void Start()
     {
         _currentRomeoResponse = GetRomeoBlock(1);
+		ui.DisplaySceneName("Act I, Scene I");
 		ui.DisplayStageDirection("Enter Romeo, Juliet.");
         ui.DisplayResponse(_currentRomeoResponse, _currentRomeoStageDirection);
 
@@ -71,9 +74,17 @@ public class ConversationManager : MonoBehaviour
 
 	public void ReceiveJulietResponse(string s)
 	{
-		_currentJulietResponse = new JulietBlock(s);
+		_currentJulietResponse = new JulietBlock(s, false);
 		_julietFlagDirty = true;
 		EmotionChecker.UpdateJulietEmotion(s);
+
+		if(s.Trim().ToLower() == "line" || s.Trim().ToLower() == "line!")
+        {
+			int julietID = _currentRomeoResponse.JulietId;
+			_currentJulietResponse = TextReader.JulietBlocks[julietID];
+			_callLine = true;
+        }
+
 		if(s == "")
 			ui.DisplayStageDirection("Silence.");
 		else
@@ -106,7 +117,7 @@ public class ConversationManager : MonoBehaviour
 				{
 					_currentRomeoResponse = GetRomeoBlock(CheckCasualConversation(s));
 				}
-				else if (s.ToLower().Contains("romeo romeo") || s.ToLower().Contains("wherefore"))
+				else if (s.ToLower().Contains("romeo romeo") || s.ToLower().Contains("wherefore") || _callLine)
 				{
 					_currentRomeoResponse = GetRomeoBlock(101);
 					state = ConversationBlock.FamilyStuff;
@@ -159,7 +170,7 @@ public class ConversationManager : MonoBehaviour
 				{
 					_currentRomeoResponse = GetRomeoBlock(CheckCasualConversation(s));
 				}
-				else if (TextChecker.CheckWhyContains(s) || TextChecker.CheckIndifferenceContains(s))
+				else if (TextChecker.CheckWhyContains(s) || TextChecker.CheckIndifferenceContains(s) || _callLine)
 				{ //why do sad hours seem long?
 					_currentRomeoResponse = GetRomeoBlock(101);
 					_blockState[state] = 1;
@@ -173,7 +184,7 @@ public class ConversationManager : MonoBehaviour
 					_currentRomeoResponse = GetRomeoBlock(CheckCasualConversation(s)); //i know not how to tell thee who i am
 				}
 
-				else if (TextChecker.CheckWhyContains(s) || TextChecker.CheckIndifferenceContains(s) || s.ToLower().Contains("romeo") || s.ToLower().Contains("montague"))
+				else if (TextChecker.CheckWhyContains(s) || TextChecker.CheckIndifferenceContains(s) || s.ToLower().Contains("romeo") || s.ToLower().Contains("montague") || _callLine)
 				{
 					_currentRomeoResponse = GetRomeoBlock(102); // it is an enemy to thee, shall i tell thee?
 					_blockState[state] = 2;
@@ -182,7 +193,7 @@ public class ConversationManager : MonoBehaviour
 			}
 			else if (_blockState[state] == 2)
 			{
-				if (TextChecker.CheckWhyContains(s) || TextChecker.CheckIndifferenceContains(s) || s.ToLower().Contains("tear") || s.ToLower().Contains("romeo") || s.ToLower().Contains("montague"))
+				if (TextChecker.CheckWhyContains(s) || TextChecker.CheckIndifferenceContains(s) || s.ToLower().Contains("tear") || s.ToLower().Contains("romeo") || s.ToLower().Contains("montague") || _callLine)
 				{
 					_currentRomeoResponse = GetRomeoBlock(103); //montague
 
@@ -191,7 +202,7 @@ public class ConversationManager : MonoBehaviour
 			}
 			else if (_blockState[state] == 3)
 			{
-				if (TextChecker.CheckYesContains(s) || TextChecker.CheckIndifferenceContains(s))
+				if (TextChecker.CheckYesContains(s) || TextChecker.CheckIndifferenceContains(s) || _callLine)
 				{
 					_currentRomeoResponse = GetRomeoBlock(104); //what should i change my name to?
 					_blockState[state] = 4;
@@ -226,7 +237,7 @@ public class ConversationManager : MonoBehaviour
 
 			else if (_blockState[state] == 6)
 			{
-				if (TextChecker.CheckNoContains(s))
+				if (TextChecker.CheckNoContains(s) || _callLine)
 				{
 					//no i am not a capulet
 					_currentRomeoResponse = GetRomeoBlock(108);
@@ -442,6 +453,7 @@ public class ConversationManager : MonoBehaviour
         }
 
 		ui.DisplayResponse(_currentRomeoResponse, _currentRomeoStageDirection);
+		_callLine = false;
 
     }
 
