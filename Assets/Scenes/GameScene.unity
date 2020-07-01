@@ -255,7 +255,7 @@ MonoBehaviour:
     m_Left: 0
     m_Right: 0
     m_Top: 0
-    m_Bottom: 0
+    m_Bottom: 4
   m_ChildAlignment: 1
   m_Spacing: 5
   m_ChildForceExpandWidth: 1
@@ -685,6 +685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _romeoResponses: {fileID: 4900000, guid: 95eb4cfe4a83b4a799ea56a25736a1be, type: 3}
+  _julietResponses: {fileID: 4900000, guid: f80bebd12ba2b4f93aff4e90d3914349, type: 3}
   _byeResponses: {fileID: 4900000, guid: d856c8d478ba44d299a72a02bc1a35b7, type: 3}
   _supResponses: {fileID: 4900000, guid: 0984e9b9bc31a4d4b8c407dba3d2f51f, type: 3}
   _indifferenceResponses: {fileID: 4900000, guid: 1a7b2eecbe88f460a961dc4931f5d3ab,
@@ -2334,8 +2335,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: say something....
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 127f39785b9b64f228e582cdc5a81bb5, type: 2}
+  m_sharedMaterial: {fileID: -3519490515755780921, guid: 127f39785b9b64f228e582cdc5a81bb5,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2491,8 +2493,9 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 127f39785b9b64f228e582cdc5a81bb5, type: 2}
+  m_sharedMaterial: {fileID: -3519490515755780921, guid: 127f39785b9b64f228e582cdc5a81bb5,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

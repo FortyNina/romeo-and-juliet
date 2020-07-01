@@ -27,6 +27,8 @@ public class ConversationManager : MonoBehaviour
 	private string _currentLineOfImportance = "";
 	private int _scene = 1;
 
+	private string _julietRawResponse = "";
+
 	private int _slipups = 0;
 
     private bool _julietFlagDirty = false;
@@ -77,6 +79,7 @@ public class ConversationManager : MonoBehaviour
 		_currentJulietResponse = new JulietBlock(s, false);
 		_julietFlagDirty = true;
 		EmotionChecker.UpdateJulietEmotion(s);
+		_julietRawResponse = s;
 
 		if(s.Trim().ToLower() == "line" || s.Trim().ToLower() == "line!")
         {
@@ -215,7 +218,7 @@ public class ConversationManager : MonoBehaviour
 			}
 			else if (_blockState[state] == 4)
 			{
-				RomeoName = "Romeo " + s;
+				RomeoName = "Romeo " + _julietRawResponse;
 				_currentRomeoResponse = GetRomeoBlock(105);
 				if (s.ToLower() == "capulet") //if the player input capulet
 				{
@@ -226,7 +229,7 @@ public class ConversationManager : MonoBehaviour
 					_currentRomeoResponse = GetRomeoBlock(151);
 					RomeoName = "Romeo";
 				}
-				_currentRomeoResponse.ReplaceLine(0, s + "?"); //new name? your kinsman will still kill me
+				_currentRomeoResponse.ReplaceLine(0, _julietRawResponse + "?"); //new name? your kinsman will still kill me
 				_blockState[state] = 5;
 			}
 			else if (_blockState[state] == 5)
@@ -256,9 +259,9 @@ public class ConversationManager : MonoBehaviour
 			}
 			else if (_blockState[state] == 7)
 			{
-				JulietName = "Juliet " + s;
+				JulietName = "Juliet " + _julietRawResponse;
 				_currentRomeoResponse = GetRomeoBlock(109);
-				_currentRomeoResponse.ReplaceLine(0, s + "?"); //new name for juliet?
+				_currentRomeoResponse.ReplaceLine(0, _julietRawResponse + "?"); //new name for juliet?
 				state = ConversationBlock.JustChatting;
 				_blockState[ConversationBlock.JustChatting] = 0;
 
@@ -380,7 +383,7 @@ public class ConversationManager : MonoBehaviour
 						_currentRomeoResponse = GetRomeoBlock(402);
 					}
 				}
-                else if (TextChecker.CheckGoodContains(s))
+                else if (TextChecker.CheckGoodContains(s) || _callLine)
 				{
 					_blockState[state] = 3;
 					_currentRomeoResponse = GetRomeoBlock(405);
@@ -388,7 +391,7 @@ public class ConversationManager : MonoBehaviour
 			}
             else if(_blockState[state] == 1)
 			{
-				if (TextChecker.CheckYesContains(s))
+				if (TextChecker.CheckYesContains(s) || _callLine)
 				{
 					_blockState[state] = 2;
 					_currentRomeoResponse = GetRomeoBlock(403); //do u feel better?
@@ -403,7 +406,7 @@ public class ConversationManager : MonoBehaviour
 
             else if(_blockState[state] == 2) //do u feel better?
 			{
-				if (TextChecker.CheckYesContains(s))
+				if (TextChecker.CheckYesContains(s) || _callLine)
 				{
 					_blockState[state] = 3;
 					_currentRomeoResponse = GetRomeoBlock(405); 
@@ -426,7 +429,7 @@ public class ConversationManager : MonoBehaviour
 					_blockState[ConversationBlock.JustChatting] = 0;
 
 				}
-				else if (TextChecker.CheckYesContains(s))
+				else if (TextChecker.CheckYesContains(s) || _callLine)
                 {
 					_currentRomeoResponse = GetRomeoBlock(404);
 					state = ConversationBlock.JustChatting;
