@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SpeakerName { Romeo, Juliet}
+public enum SpeakerName { Romeo, Juliet, Chorus}
 
 namespace ShakespeareReader
 {

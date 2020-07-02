@@ -9,20 +9,23 @@ public enum ConversationBlock { Introduction, FamilyStuff, JustChatting, FateOrF
 public class ConversationManager : MonoBehaviour
 {
 
-    public static ConversationBlock state = ConversationBlock.Introduction;
+	public static ConversationBlock state = ConversationBlock.Introduction;
 
-    public static string RomeoName = "Romeo";
+	public static string RomeoName = "Romeo";
 	public static string JulietName = "Juliet";
 
 
-    [SerializeField]
-    private UIFiller ui;
+	[SerializeField]
+	private UIFiller ui;
+
+	[SerializeField]
+	private GameObject _inputField;
 
 
-    private JulietBlock _currentJulietResponse;
-    private RomeoBlock _currentRomeoResponse;
-    private RomeoBlock _currentImportantRomeoResponse;
-    private ConversationBlock _currentImportantState;
+	private JulietBlock _currentJulietResponse;
+	private RomeoBlock _currentRomeoResponse;
+	private RomeoBlock _currentImportantRomeoResponse;
+	private ConversationBlock _currentImportantState;
 	private string _currentRomeoStageDirection = "";
 	private string _currentLineOfImportance = "";
 	private int _scene = 1;
@@ -31,44 +34,42 @@ public class ConversationManager : MonoBehaviour
 
 	private int _slipups = 0;
 
-    private bool _julietFlagDirty = false;
+	private bool _julietFlagDirty = false;
 
-    private Dictionary<ConversationBlock, int> _blockState = new Dictionary<ConversationBlock, int>();
+	private Dictionary<ConversationBlock, int> _blockState = new Dictionary<ConversationBlock, int>();
 
 	private float _lapsedTime = 0;
 	private bool _pauseLineCreated = false;
 	private bool _callLine = false;
 
 
-    private void Start()
-    {
-        _currentRomeoResponse = GetRomeoBlock(1);
-		ui.DisplaySceneName("Act I, Scene I");
-		ui.DisplayStageDirection("Enter Romeo, Juliet.");
-        ui.DisplayResponse(_currentRomeoResponse, _currentRomeoStageDirection);
+	private void Start()
+	{
+		_currentRomeoResponse = GetRomeoBlock(1);
+		StartCoroutine(DisplayIntro());
 
-        _blockState.Add(ConversationBlock.Introduction, 0);
-        _blockState.Add(ConversationBlock.FamilyStuff, 0);
-        _blockState.Add(ConversationBlock.JustChatting, 0);
-        _blockState.Add(ConversationBlock.FateOrFreeWill, 0);
+		_blockState.Add(ConversationBlock.Introduction, 0);
+		_blockState.Add(ConversationBlock.FamilyStuff, 0);
+		_blockState.Add(ConversationBlock.JustChatting, 0);
+		_blockState.Add(ConversationBlock.FateOrFreeWill, 0);
 		_blockState.Add(ConversationBlock.InLove, 0);
 		_blockState.Add(ConversationBlock.YourEmotion, 0);
-		
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (_julietFlagDirty)
-        {
-            _julietFlagDirty = false;
-            GetRomeoResponse(_currentJulietResponse.FullText);
-        }
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
+		if (_julietFlagDirty)
+		{
+			_julietFlagDirty = false;
+			GetRomeoResponse(_currentJulietResponse.FullText);
+		}
 
 		_lapsedTime += Time.deltaTime;
 
-		if(!_pauseLineCreated && _lapsedTime > 20)
-        {
+		if (!_pauseLineCreated && _lapsedTime > 20)
+		{
 			_pauseLineCreated = true;
 			ui.DisplayStageDirection("A pause.");
 		}
@@ -81,25 +82,25 @@ public class ConversationManager : MonoBehaviour
 		EmotionChecker.UpdateJulietEmotion(s);
 		_julietRawResponse = s;
 
-		if(s.Trim().ToLower() == "line" || s.Trim().ToLower() == "line!")
-        {
+		if (s.Trim().ToLower() == "line" || s.Trim().ToLower() == "line!")
+		{
 			int julietID = _currentRomeoResponse.JulietId;
 			_currentJulietResponse = TextReader.JulietBlocks[julietID];
 			_callLine = true;
-        }
+		}
 
-		if(s == "")
+		if (s == "")
 			ui.DisplayStageDirection("Silence.");
 		else
 			ui.DisplayResponse(_currentJulietResponse, EmotionChecker.GetJulietStageDirection(s, _lapsedTime));
 		_lapsedTime = 0;
 		_pauseLineCreated = false;
-    }
+	}
 
 
-    private void GetRomeoResponse(string s)
-    {
-        _currentRomeoResponse = GetRomeoBlock(1005);
+	private void GetRomeoResponse(string s)
+	{
+		_currentRomeoResponse = GetRomeoBlock(1005);
 		_currentRomeoStageDirection = "";
 
 		#region Introduction Blocks
@@ -144,7 +145,7 @@ public class ConversationManager : MonoBehaviour
 
 				}
 				else if (TextChecker.CheckIndifference(s) || TextChecker.CheckNoContains(s) || s.ToLower().Contains("romeo"))
-                {
+				{
 					_currentRomeoResponse = GetRomeoBlock(400);
 					state = ConversationBlock.YourEmotion;
 					_blockState[state] = 0;
@@ -152,8 +153,8 @@ public class ConversationManager : MonoBehaviour
 				//  else if() asking about identity
 				//family region
 			}
-			else if(_blockState[state] == 2)
-            {
+			else if (_blockState[state] == 2)
+			{
 				//go to family things
 				_currentRomeoResponse = GetRomeoBlock(100); //sad hours seem long
 				_currentRomeoStageDirection = "somberly";
@@ -327,18 +328,22 @@ public class ConversationManager : MonoBehaviour
 				if (_blockState[ConversationBlock.FamilyStuff] < 5) //TODO: CHANGE OUT 5
 				{
 					//go to family things
+					_scene++;
+					//ui.DisplaySceneName("Act I, Scene " + GetRomanNumeral(_scene));
 					_currentRomeoResponse = GetRomeoBlock(100); //sad hours seem long
 					_currentRomeoStageDirection = "somberly";
 					state = ConversationBlock.FamilyStuff;
 				}
 				else if (_blockState[ConversationBlock.YourEmotion] < 2)
 				{
+					_scene++;
+					//ui.DisplaySceneName("Act I, Scene " + GetRomanNumeral(_scene));
 					_currentRomeoResponse = GetRomeoBlock(400);
 					state = ConversationBlock.YourEmotion;
 					_blockState[state] = 0;
 				}
-                else
-                {
+				else
+				{
 					_currentRomeoResponse = GetRomeoBlock(1008);
 
 				}
@@ -383,13 +388,13 @@ public class ConversationManager : MonoBehaviour
 						_currentRomeoResponse = GetRomeoBlock(402);
 					}
 				}
-                else if (TextChecker.CheckGoodContains(s) || _callLine)
+				else if (TextChecker.CheckGoodContains(s) || _callLine)
 				{
 					_blockState[state] = 3;
 					_currentRomeoResponse = GetRomeoBlock(405);
 				}
 			}
-            else if(_blockState[state] == 1)
+			else if (_blockState[state] == 1)
 			{
 				if (TextChecker.CheckYesContains(s) || _callLine)
 				{
@@ -397,19 +402,19 @@ public class ConversationManager : MonoBehaviour
 					_currentRomeoResponse = GetRomeoBlock(403); //do u feel better?
 				}
 
-                else if (TextChecker.CheckNoContains(s))
+				else if (TextChecker.CheckNoContains(s))
 				{
 					_blockState[state] = 3;
 					_currentRomeoResponse = GetRomeoBlock(405); //do u feel better?
 				}
 			}
 
-            else if(_blockState[state] == 2) //do u feel better?
+			else if (_blockState[state] == 2) //do u feel better?
 			{
 				if (TextChecker.CheckYesContains(s) || _callLine)
 				{
 					_blockState[state] = 3;
-					_currentRomeoResponse = GetRomeoBlock(405); 
+					_currentRomeoResponse = GetRomeoBlock(405);
 				}
 
 				else if (TextChecker.CheckNoContains(s))
@@ -419,10 +424,10 @@ public class ConversationManager : MonoBehaviour
 				}
 
 			}
-            else if(_blockState[state] == 3)
+			else if (_blockState[state] == 3)
 			{
-                if (TextChecker.CheckNoContains(s))
-                {
+				if (TextChecker.CheckNoContains(s))
+				{
 					_currentRomeoResponse = GetRomeoBlock(406);
 					_currentRomeoStageDirection = "devastated";
 					state = ConversationBlock.JustChatting;
@@ -430,13 +435,13 @@ public class ConversationManager : MonoBehaviour
 
 				}
 				else if (TextChecker.CheckYesContains(s) || _callLine)
-                {
+				{
 					_currentRomeoResponse = GetRomeoBlock(404);
 					state = ConversationBlock.JustChatting;
 					_blockState[ConversationBlock.JustChatting] = 0;
 				}
 			}
-			
+
 		}
 		//===========================================================================================================
 		#endregion
@@ -448,54 +453,91 @@ public class ConversationManager : MonoBehaviour
 			_slipups = 0;
 		}
 
-		if(_slipups > 1)
-        {
+		if (_slipups > 1)
+		{
 			Debug.Log(_currentRomeoResponse.FullText);
 			_currentRomeoResponse = GetHelperRomeoBlock(_currentRomeoResponse.FullText);
-			
-        }
+
+		}
 
 		ui.DisplayResponse(_currentRomeoResponse, _currentRomeoStageDirection);
 		_callLine = false;
 
-    }
+	}
 
 
-    private RomeoBlock GetRomeoBlock(int id)
-    {
-        return (TextReader.RomeoBlocks[id]);
-    }
-
-    private int CheckCasualConversation(string s)
-    {
-        if (TextChecker.CheckRosaline(s))
-        {
-            return 1000;
-        }
-        else if (TextChecker.CheckBye(s))
-        {
-            return 1007;
-        }
-        else if(TextChecker.CheckRobot(s))
-        {
-            state = ConversationBlock.FateOrFreeWill;
-            return 300;
-        }
-        return -1;
-    }
-
-    private int GetRandomCompliment()
+	private RomeoBlock GetRomeoBlock(int id)
 	{
-		if (Random.Range(0, 1) == 0){
+		return (TextReader.RomeoBlocks[id]);
+	}
+
+	private int CheckCasualConversation(string s)
+	{
+		if (TextChecker.CheckRosaline(s))
+		{
+			return 1000;
+		}
+		else if (TextChecker.CheckBye(s))
+		{
+			return 1007;
+		}
+		else if (TextChecker.CheckRobot(s))
+		{
+			state = ConversationBlock.FateOrFreeWill;
+			return 300;
+		}
+		return -1;
+	}
+
+	private int GetRandomCompliment()
+	{
+		if (Random.Range(0, 1) == 0)
+		{
 			return 2000;
 		}
 		return 2000;
 	}
 
 	private RomeoBlock GetHelperRomeoBlock(string fullText)
-    {
+	{
 		RomeoBlock rb = new RomeoBlock(fullText + "+" + _currentLineOfImportance);
 		return rb;
-    }
+	}
 
+	private string GetRomanNumeral(int i)
+	{
+		switch (i)
+		{
+			case 2:
+				return "II";
+			case 3:
+				return "III";
+			case 4:
+				return "IV";
+			case 5:
+				return "V";
+			case 6:
+				return "VI";
+			default:
+				return "I";
+		}
+
+
+	}
+
+	private IEnumerator DisplayIntro()
+    {
+		_inputField.SetActive(false);
+		ui.DisplaySceneName("Act I, Scene I");
+		yield return new WaitForSeconds(.1f);
+		ui.DisplayStageDirection("Enter Chorus.");
+		yield return new WaitForSeconds(.1f);
+		ui.DisplayResponse(TextReader.ChorusBlocks[0], _currentRomeoStageDirection);
+		yield return new WaitForSeconds(4);
+		ui.DisplayStageDirection("Enter Romeo, Juliet.");
+		ui.DisplayResponse(_currentRomeoResponse, _currentRomeoStageDirection);
+		yield return new WaitForSeconds(3f);
+		_inputField.SetActive(true);
+		
+	}
 }

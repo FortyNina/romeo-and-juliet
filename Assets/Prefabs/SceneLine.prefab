@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7457569892490500405}
   - component: {fileID: 5377788827494778221}
   m_Layer: 5
-  m_Name: StageDirectionLine 1
+  m_Name: SceneLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 513
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0

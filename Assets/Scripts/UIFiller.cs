@@ -64,7 +64,13 @@ public class UIFiller : MonoBehaviour
             _recorder.WriteLine(block.FullText, ConversationManager.RomeoName);
 
         }
+        else if(block.speaker == SpeakerName.Chorus)
+        {
+            StartCoroutine(DisplayEachLine(block.TextLines, 2f, .25f, _neutralStageDirCol, "CHORUS", SpeakerName.Chorus, stageDirection, _neutralStageDirCol));
+            _recorder.WriteLine(block.FullText, "CHORUS");
+        }
     }
+
 
     public void DisplayStageDirection(string direction)
     {
@@ -111,7 +117,6 @@ public class UIFiller : MonoBehaviour
 		}
 
     }
-
 
     private void CreateLine(string txt, Color col, GameObject lineType)
     {

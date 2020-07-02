@@ -12,6 +12,8 @@ namespace ShakespeareReader
 		[SerializeField]
 		private TextAsset _julietResponses;
 		[SerializeField]
+		private TextAsset _chorusResponses;
+		[SerializeField]
 		private TextAsset _byeResponses;
 		[SerializeField]
 		private TextAsset _supResponses;
@@ -41,6 +43,13 @@ namespace ShakespeareReader
 		{
 			get { return _julietBlocks; }
 		}
+
+		private static Dictionary<int, ChorusBlock> _chorusBlocks = new Dictionary<int, ChorusBlock>();
+		public static Dictionary<int, ChorusBlock> ChorusBlocks
+		{
+			get { return _chorusBlocks; }
+		}
+
 
 		private static string[] _byeLines;
 		public static string[] ByeLines
@@ -120,6 +129,15 @@ namespace ShakespeareReader
             {
 				JulietBlock jb = new JulietBlock(chunks[i], true);
 				JulietBlocks.Add(jb.TextId, jb);
+            }
+
+			//CHORUS DATA
+
+			chunks = _chorusResponses.text.Split('-');
+			for(int i = 0; i< chunks.Length; i++)
+            {
+				ChorusBlock cb = new ChorusBlock(chunks[i]);
+				ChorusBlocks.Add(cb.TextId, cb);
             }
 
 			//BYE DATA
